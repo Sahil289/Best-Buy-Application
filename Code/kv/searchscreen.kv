@@ -1,0 +1,46 @@
+#: import utils kivy.utils
+#:import SlideTransition kivy.uix.screenmanager.SlideTransition
+<SearchScreen>:
+    name:"search_screen"
+    id:"search_screen"
+    on_enter:
+        app.animate_card(card)
+        app.animate_background(background)
+    BackgroundLayer:
+        id:background
+    MDCard:
+        id:card
+        orientation:"vertical"
+        size_hint:0.9,0.7
+        pos_hint:{"center_x":0.5,"center_y":0}
+        md_bg_color : [206/255,241/255,251/255,1]
+        elevation:15
+        padding:[20,100,20,100]
+        spacing:0
+        BoxLayout:
+            orientation:"vertical"
+            MDLabel:
+                id:mssg
+                text:"[color=1E045E][b]Please enter precised product name[/b][/color]"
+                markup:True
+                pos_hint:{"center_x":0.5}
+            MDTextField:
+                id:pro_name
+                hint_text:"Product Name"
+                helper_text:"Example: Apple iPhone 11"
+                helper_text_mode:"on_focus"
+                multiline:False
+            MDLabel:
+                id:notify
+                text:""
+                color:(1,1,1,1)
+                markup:True
+        MDFillRoundFlatButton:
+            text:"Search"
+            size_hint:0.9,0.13
+            pos_hint : {"center_x":.5}
+            theme_text_color : "Custom"
+            text_color : [0,0,0,1]
+            on_release:
+                app.my_firebase.search_product(pro_name.text)
+                root.manager.transition.direction="left"

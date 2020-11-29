@@ -1,0 +1,102 @@
+#:kivy 1.11.1
+#:import SlideTransition kivy.uix.screenmanager.SlideTransition
+#:import utils kivy.utils
+<SigninScreen>:
+    name:"signin_screen"
+    id:"signin_screen"
+    on_enter:
+        app.animate_card(card)
+        app.animate_background(background)
+    BackgroundLayer:
+        id:background
+    MDCard:
+        id:card
+        spacing:40
+        orientation:"vertical"
+        size_hint:[0.9,0.7]
+        pos_hint:{"center_x":0.5,"center_y":0.5}
+        md_bg_color : [206/255,241/255,251/255,1]
+        elevation:15
+        padding:[15,15,15,15]
+        BoxLayout:
+            orientation:"vertical"
+            spacing:0
+            MDLabel:
+                text:"[color=50296a]User Login[/color]"
+                font_size : 80
+                halign : "center"
+                size_hint_y : None
+                height : self.texture_size[1]
+                padding_y : 20
+                bold:True
+                markup:True
+            MDLabel:
+                text:"[color=50296a]SIGN IN[/color]"
+                halign : "center"
+                markup:True
+                size_hint_x : None
+                font_size :40
+                width:300
+                pos_hint : {"center_x":.5}
+        MDTextField:
+            id:signin_email
+            hint_text:"Email"
+            helper_text:"If new user then click on Sign up"
+            helper_text_mode:"on_focus"
+            multiline:False
+        MDTextField:
+            id:signin_pass
+            hint_text:"Password"
+            password:True
+            helper_text:"Or click on Forgot password"
+            helper_text_mode:"on_focus"
+            multiline:False
+        MDFillRoundFlatButton:
+            text:"Sign In"
+            size_hint:0.9,0.29
+            pos_hint : {"center_x":.5}
+            font_size:15
+            theme_text_color : "Custom"
+            text_color : [0,0,0,1]
+            on_release:
+                app.my_firebase.sign_in(signin_email.text,signin_pass.text)
+                root.manager.transition.direction="left"
+        MDFillRoundFlatButton:
+            text:"Forgot Password"
+            font_size:14
+            size_hint:0.9,0.29
+            pos_hint : {"center_x":.5}
+            theme_text_color : "Custom"
+            text_color : [0,0,0,1]
+            on_release:
+                app.my_firebase.reset_pass(signin_email.text)
+                root.manager.transition.direction="left"
+        MDRectangleFlatButton:
+            text:"New User? Sign Up"
+            pos_hint:{"center_x":0.5}
+            size_hint_x:None
+            width:300
+            on_release:
+                root.manager.current='signup_screen'
+                root.manager.transition.direction="left"
+        MDLabel:
+            id:signin_mssg
+            color:(1,0,0,1)
+            text:""
+            halign:"center"
+            pos_hint : {"center_x":.5}
+<BackgroundLayer@BoxLayout>:
+    orientation:"vertical"
+    BoxLayout:
+        id:bx
+        orientation:"vertical"
+        size_hint_y:0.1
+        canvas.before:
+            Color:
+                rgba:utils.get_color_from_hex("1E045E")
+            RoundedRectangle:
+                pos:self.pos
+                size:self.size
+                radius:[0,0,40,40]
+    BoxLayout:
+        orientation:"horizontal"

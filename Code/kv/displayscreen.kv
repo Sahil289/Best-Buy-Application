@@ -1,0 +1,58 @@
+#: import utils kivy.utils
+#: import SlideTransition kivy.uix.screenmanager.SlideTransition
+<DisplayScreen@Screen>:
+    name:"display_screen"
+    id:"display_screen"
+    on_enter:
+        app.animate_card(card)
+        app.animate_background(background)
+    BackgroundLayer:
+        id:background
+    MDCard:
+        id:card
+        orientation:"vertical"
+        size_hint:[0.9,0.7]
+        pos_hint:{"center_x":0.5,"center_y":0}
+        md_bg_color : [206/255,241/255,251/255,1]
+        elevation:15
+        padding:[15,50,15,20]
+        spacing:15
+        BoxLayout:
+            orientation:"vertical"
+            spacing:0
+            padding:[15,10,15,10]
+            MDLabel:
+                id:label1
+                text:" "
+                markup:True
+                size_hint:1,.1
+                pos_hint:{"top":1,"left":1}
+            MDLabel:
+                id:label2
+                text:" "
+                markup:True
+                size_hint:1,.1
+                pos_hint:{"top":.80,"left":1}
+            MDLabel:
+                id:label3
+                text:" "
+                markup:True
+                size_hint:1,.1
+                pos_hint:{"top":.60,"left":1}
+            MDLabel:
+                id:label4
+                text:" "
+                markup:True
+                size_hint:1,.1
+                pos_hint:{"top":.40,"left":1}
+        MDFillRoundFlatButton:
+            text:"Back"
+            size_hint:0.9,0.13
+            pos_hint : {"center_x":.5}
+            theme_text_color : "Custom"
+            text_color : [0,0,0,1]
+            on_release:
+                root.manager.transition.direction="left"
+                root.manager.current="search_screen"
+                root.manager.transition.direction="right"
+                app.root.ids["search_screen"].ids['pro_name'].text=""

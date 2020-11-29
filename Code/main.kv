@@ -1,0 +1,25 @@
+#: include kv/signinscreen.kv
+#: include kv/signupscreen.kv
+#: include kv/searchscreen.kv
+#: include kv/displayscreen.kv
+GridLayout:
+    cols:1
+    ScreenManager:
+        id:screen_manager
+        name:'screen_manager'
+        canvas.before:
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        SigninScreen:
+            name:"signin_screen"
+            id:signin_screen
+        SignupScreen:
+            name:"signup_screen"
+            id:signup_screen
+        SearchScreen:
+            name:"search_screen"
+            id:search_screen
+        DisplayScreen:
+            name:"display_screen"
+            id:display_screen

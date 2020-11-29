@@ -1,0 +1,72 @@
+#: import utils kivy.utils
+#:import SlideTransition kivy.uix.screenmanager.SlideTransition
+<SignupScreen>:
+    name:"signup_screen"
+    id:"signup_screen"
+    on_enter:
+        app.animate_card(card)
+        app.animate_background(background)
+    BackgroundLayer:
+        id:background
+    MDCard:
+        id:card
+        spacing:40
+        orientation:"vertical"
+        size_hint:[0.9,0.7]
+        pos_hint:{"center_x":0.5,"center_y":0.5}
+        md_bg_color : [206/255,241/255,251/255,1]
+        elevation:15
+        padding:[15,15,15,15]
+        BoxLayout:
+            orientation:"vertical"
+            spacing:0
+            MDLabel:
+                text:"[color=50296a]User Registration[/color]"
+                font_size : 80
+                halign : "center"
+                size_hint_y : None
+                height : self.texture_size[1]
+                padding_y : 30
+                bold:True
+                markup:True
+            MDLabel:
+                text:"[color=50296a]SIGN UP[/color]"
+                halign : "center"
+                markup:True
+                size_hint_x : None
+                font_size : 40
+                width:300
+                pos_hint : {"center_x":.5}
+        MDTextField:
+            id:signup_email
+            hint_text:"Email"
+            multiline:False
+        MDTextField:
+            id:signup_pass
+            hint_text:"Password"
+            password:True
+            multiline:False
+        MDFillRoundFlatButton:
+            text : "SIGN-UP"
+            font_size : 15
+            size_hint:0.9,0.25
+            pos_hint : {"center_x":.5}
+            theme_text_color : "Custom"
+            text_color : [0,0,0,1]
+            on_release:
+                app.my_firebase.sign_up(signup_email.text,signup_pass.text)
+        MDRectangleFlatButton:
+            text:"Already have an account? Login"
+            pos_hint:{"center_x":0.5}
+            size_hint_x:None
+            width:300
+            font_size:12
+            on_release:
+                root.manager.current="signin_screen"
+                root.manager.transition.direction="right"
+        MDLabel:
+            id:signup_mssg
+            text:""
+            color:(1,0,0,1)
+            halign : "center"
+            pos_hint:{"center_x":.5}
