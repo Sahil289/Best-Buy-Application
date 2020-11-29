@@ -1,0 +1,7 @@
+This is an android app build with python using kivy and kivyMD.
+Using this app you can get the best mobile product which has greater ratings and good reviews.
+For now this app can only compare mobile products and for that you have to enter the exact name
+of the product, for example suppose you want to search for IPhone 11 Pro, then you have to enter
+the name as "Apple IPhone 11 Pro" then only you'll get the best product from amazon or flipkart
+otherwise if you enter the name as "apple iphone 11 pro" then you won't  get the output.
+Till now this app can be used to compare the products from Amazon and Flipkart.
